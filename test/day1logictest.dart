@@ -38,7 +38,7 @@ void main() {
     expect(result, 5);
   });
 
-  test("Actual puzzle input", () async {
+  test("Day 1 actual puzzle input", () async {
     var input = await File('assets/day1.txt').readAsString();
     var numbers = Day1Logic.parseInput(input);
 
