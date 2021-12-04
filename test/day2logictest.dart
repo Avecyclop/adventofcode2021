@@ -32,7 +32,7 @@ void main() {
     expect(result, 900);
   });
 
-  test("Day2 actual puzzle input", () async {
+  test("Day 2 actual puzzle input", () async {
     var input = await File('assets/day2.txt').readAsString();
     var commands = Day2Logic.parseInput(input);
 
