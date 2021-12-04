@@ -67,8 +67,6 @@ class Day3Logic {
     var oxygen = matrix.toList();
     var co2 = matrix.toList();
 
-    print("Matrix: ${matrix.length}");
-
     for (int x = 0; x < oxygen[0].length; x++) {
       if (oxygen.length == 1) {
         break;

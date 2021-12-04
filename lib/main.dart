@@ -2,18 +2,16 @@ import 'package:flutter/material.dart';
 
 import 'day1.dart';
 import 'day2.dart';
-import 'day3.dart';
+import 'day4.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var days = [Day1(), Day2(), Day3()];
-    var tabs = <Tab>[];
-    for (int i = 1; i <= days.length; i++) {
-      tabs.add(Tab(text: "Day $i"));
-    }
+    var days = [Day1(), Day2(), Day4()];
+    var tabs = ["Day 1", "Day 2", "Day 4"]
+        .map((e) => Tab(text: e)).toList();
 
     return MaterialApp(
       home: DefaultTabController(
