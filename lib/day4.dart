@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:adventofcode2021/lib.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -18,9 +19,62 @@ class _Part1 extends StatefulWidget {
   _Part1State createState() => _Part1State();
 }
 
-class _Part1State extends State<_Part1> with TickerProviderStateMixin {
+class _Part1State extends State<_Part1> {
+  BingoGame _bingoGame;
+  Timer _timer;
+  int _winner;
+
   @override
-  noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+  void initState() {
+    super.initState();
+    _loadDayInput().then((value) {
+      _bingoGame = value;
+      _timer = Timer.periodic(Duration(milliseconds: 250), (t) {
+        var winningBoard = _bingoGame.part1drawNumber();
+        if (winningBoard > -1) {
+          _winner = winningBoard;
+          t.cancel();
+        }
+        setState(() {});
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 10),
+      itemBuilder: (_, index) => bingoBoard(index),
+      itemCount: 100,
+    );
+  }
+
+  Widget bingoBoard(int index) {
+    if (_winner == index) {
+      return Icon(Icons.check, color: Colors.green);
+
+    }
+    if (_bingoGame == null) {
+      return Center(child: WhiteText("?"));
+    }
+    var board = _bingoGame.boards[index];
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 5),
+      itemBuilder: (_, index) {
+        var number = board.numbers[index ~/ 5][index % 5];
+        var text = number.marked ? "  " : number.number;
+        return WhiteText("$text".padLeft(2), fontSize: 10);
+      },
+      itemCount: 25,
+      padding: EdgeInsets.all(5),
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _timer?.cancel();
+  }
 }
 
 class _Part2 extends StatefulWidget {
@@ -28,7 +82,7 @@ class _Part2 extends StatefulWidget {
   _Part2State createState() => _Part2State();
 }
 
-class _Part2State extends State<_Part2> with TickerProviderStateMixin {
+class _Part2State extends State<_Part2> {
   @override
   noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
@@ -38,6 +92,7 @@ Future<BingoGame> _loadDayInput() async => await rootBundle.loadString('assets/d
 class BingoGame {
   List<int> numbers;
   List<BingoBoard> boards;
+  int _round = 0;
 
   BingoGame(this.numbers, this.boards);
 
@@ -67,6 +122,16 @@ class BingoGame {
       }
     }
     throw Exception("Nobody won");
+  }
+
+  int part1drawNumber() {
+    var number = numbers[_round++];
+    for (int i = 0; i < boards.length; i++) {
+      if (boards[i].mark(number) > -1) {
+        return i;
+      }
+    }
+    return -1;
   }
 }
 
