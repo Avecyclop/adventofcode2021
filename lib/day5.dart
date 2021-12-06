@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'dart:io';
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tuple/tuple.dart';
@@ -21,9 +21,29 @@ class _Part1 extends StatefulWidget {
   _Part1State createState() => _Part1State();
 }
 
-class _Part1State extends State<_Part1> with TickerProviderStateMixin {
+class _Part1State extends State<_Part1> {
+  List<Line> _lines;
+
   @override
-  noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+  void initState() {
+    super.initState();
+    _loadDayInput().then((lines) {
+      _lines = lines;
+      setState(() {});
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_lines == null) {
+      return CircularProgressIndicator();
+    }
+    return SizedBox.expand(
+        child: CustomPaint(
+      size: Size(989, 989),
+      painter: MapPainter(_lines),
+    ));
+  }
 }
 
 class _Part2 extends StatefulWidget {
@@ -31,12 +51,66 @@ class _Part2 extends StatefulWidget {
   _Part2State createState() => _Part2State();
 }
 
-class _Part2State extends State<_Part2> with TickerProviderStateMixin {
+class _Part2State extends State<_Part2> {
+  List<Line> _lines;
+
   @override
-  noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+  void initState() {
+    super.initState();
+    _loadDayInput().then((lines) {
+      _lines = lines;
+      setState(() {});
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_lines == null) {
+      return CircularProgressIndicator();
+    }
+    return SizedBox(child: CustomPaint(painter: MapPainter(_lines, diagonals: true)));
+  }
 }
 
-Future<dynamic> _loadDayInput() async => await rootBundle.loadString('assets/day5.txt').then(Day5Logic.parseInput);
+class MapPainter extends CustomPainter {
+  List<Line> _lines;
+  bool diagonals;
+
+  MapPainter(this._lines, {this.diagonals = false});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    var xFactor = size.width / 989;
+    var yFactor = size.height / 989;
+    _lines.where((line) => line.x1 == line.x2 || line.y1 == line.y2).forEach((line) {
+      canvas.drawLine(
+        Offset(line.x1 * xFactor, line.y1 * yFactor),
+        Offset(line.x2 * xFactor, line.y2 * yFactor),
+        new Paint()
+          ..color = Colors.grey
+          ..style = PaintingStyle.fill,
+      );
+    });
+    if (diagonals) {
+      _lines.where((line) => line.x1 != line.x2 && line.y1 != line.y2).forEach((line) {
+        canvas.drawLine(
+          Offset(line.x1 * xFactor, line.y1 * yFactor),
+          Offset(line.x2 * xFactor, line.y2 * yFactor),
+          new Paint()
+            ..color = Colors.grey[800]
+            ..style = PaintingStyle.fill,
+        );
+      });
+    }
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter old) {
+    return false;
+  }
+}
+
+Future<List<Line>> _loadDayInput() async => await rootBundle.loadString('assets/day5.txt').then(Day5Logic.parseInput);
 
 class Line {
   int x1;

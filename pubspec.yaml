@@ -55,6 +55,7 @@ flutter:
     - assets/day2.txt
     - assets/day3.txt
     - assets/day4.txt
+    - assets/day5.txt
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
