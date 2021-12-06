@@ -32,7 +32,7 @@ void main() {
     expect(result, 4512);
   });
 
-  test("Test day 4 part 2 - first solution", () {
+  test("Test day 4 part 2", () {
     var bingo = Day4Logic.parseInput(example);
     var result = bingo.playPart2();
     expect(result, 1924);

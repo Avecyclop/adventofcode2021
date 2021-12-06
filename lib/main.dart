@@ -4,14 +4,15 @@ import 'day1.dart';
 import 'day2.dart';
 import 'day4.dart';
 import 'day5.dart';
+import 'day6.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var days = [Day1(), Day2(), Day4(), Day5()];
-    var tabs = ["Day 1", "Day 2", "Day 4", "Day 5"]
+    var days = [Day1(), Day2(), Day4(), Day5(), Day6()];
+    var tabs = ["Day 1", "Day 2", "Day 4", "Day 5", "Day 6"]
         .map((e) => Tab(text: e)).toList();
 
     return MaterialApp(

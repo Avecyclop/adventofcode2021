@@ -23,7 +23,7 @@ void main() {
     expect(result, 5);
   });
 
-  test("Test day 5 part 2 - first solution", () {
+  test("Test day 5 part 2", () {
     var lines = Day5Logic.parseInput(example);
     var result = Day5Logic.part2(lines);
     expect(result, 12);

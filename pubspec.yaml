@@ -30,6 +30,7 @@ dependencies:
   tuple: ^2.0.0
   animated_background: ^2.0.0
   flutter_tabler_icons: ^1.1.1
+  charts_flutter: ^0.12.0
 
 dev_dependencies:
   flutter_test:
@@ -56,6 +57,7 @@ flutter:
     - assets/day3.txt
     - assets/day4.txt
     - assets/day5.txt
+    - assets/day6.txt
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
