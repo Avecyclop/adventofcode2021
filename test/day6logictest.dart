@@ -21,7 +21,7 @@ void main() {
   });
 
   test("Day 6 actual puzzle input", () async {
-    var input = await File('assets/Day6.txt').readAsString();
+    var input = await File('assets/day6.txt').readAsString();
 
     var part1 = Day6Logic.part1(Day6Logic.parseInput(input));
     var part2 = Day6Logic.part2(Day6Logic.parseInput(input));
