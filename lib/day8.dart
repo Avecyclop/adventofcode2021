@@ -78,7 +78,7 @@ class Day8Logic {
     signals.remove(four);
     signals.remove(seven);
     signals.remove(eight);
-    // Find 6: Uses six segments but shares only one segment with 1
+    // Find 6: Uses six segments but shares only one segment with 1's two segments
     var six = signals.where((e) => e.length == 6).singleWhere((e) => e.contains(one[0]) ^ e.contains(one[1]));
     digits[six] = 6;
     signals.remove(six);
@@ -98,7 +98,7 @@ class Day8Logic {
     var five = signals.singleWhere((e) => commonSegments(e, six) == 5);
     digits[five] = 5;
     signals.remove(five);
-    // Last is 2
+    // Find 2: Last digit left is 2
     digits[signals.single] = 2;
 
     return output(entry, digits);

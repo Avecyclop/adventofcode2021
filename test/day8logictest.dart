@@ -24,8 +24,8 @@ void main() {
   });
 
   test("Day 8 solve line", () {
-    var example = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf";
-    var entries = Day8Logic.parseInput(example);
+    var line = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf";
+    var entries = Day8Logic.parseInput(line);
     var result = Day8Logic.solveLine(entries.first);
     expect(result, 5353);
   });
@@ -37,8 +37,8 @@ void main() {
   });
 
   test("Day 8 calculate output by digits", () {
-    var example = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf";
-    var entries = Day8Logic.parseInput(example);
+    var line = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf";
+    var entries = Day8Logic.parseInput(line);
     var digits = {
       "abcdefg": 8,
       "bcdef": 5,
