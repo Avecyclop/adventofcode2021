@@ -19,9 +19,49 @@ class _Part1 extends StatefulWidget {
   _Part1State createState() => _Part1State();
 }
 
-class _Part1State extends State<_Part1> {
+class _Part1State extends State<_Part1> with TickerProviderStateMixin {
+  var _heightMap;
+
   @override
-  noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+  void initState() {
+    super.initState();
+    _loadDayInput().then((value) {
+      _heightMap = value;
+      setState(() {});
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_heightMap == null) {
+      return CircularProgressIndicator();
+    }
+    return CustomPaint(painter: HeightMapPainter(_heightMap));
+  }
+}
+
+class HeightMapPainter extends CustomPainter {
+  List<List<int>> _heightMap;
+
+  HeightMapPainter(this._heightMap);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    var height = size.height / _heightMap.length;
+    var width = size.width / _heightMap[0].length;
+    for (int y = 0; y < _heightMap.length; y++) {
+      for (int x = 0; x < _heightMap[y].length; x++) {
+        var point = _heightMap[y][x];
+        var colorTint = point == 9 ? 50 : (9 - point) * 100;
+        canvas.drawRect(Rect.fromLTWH(x * width, y * height, width, height), Paint()..color = Colors.blueGrey[colorTint]);
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter old) {
+    return false;
+  }
 }
 
 class _Part2 extends StatefulWidget {

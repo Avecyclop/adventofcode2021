@@ -54,10 +54,10 @@ flutter:
   assets:
     - assets/day1.txt
     - assets/day2.txt
-    - assets/day3.txt
     - assets/day4.txt
     - assets/day5.txt
     - assets/day6.txt
+    - assets/day9.txt
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
