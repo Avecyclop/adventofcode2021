@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -42,15 +41,17 @@ class Day11Logic {
 
   static part1(List<List<int>> octopuses) {
     addOuterLayer(octopuses);
-    int flashes = 0;
-    for (int i = 0; i < 100; i++) {
-      for (int y = 1; y < 11; y++) {
-        for (int x = 1; x < 11; x++) {
+    var maxX = octopuses[0].length - 1;
+    var maxY = octopuses.length - 1;
+    var flashes = 0;
+    for (int step = 1; step <= 100; step++) {
+      for (int y = 1; y < maxY; y++) {
+        for (int x = 1; x < maxX; x++) {
           octopuses[y][x]++;
         }
       }
-      for (int y = 1; y < 11; y++) {
-        for (int x = 1; x < 11; x++) {
+      for (int y = 1; y < maxY; y++) {
+        for (int x = 1; x < maxX; x++) {
           if (octopuses[y][x] > 9) {
             flashes += illuminate(octopuses, x, y);
           }
@@ -61,7 +62,7 @@ class Day11Logic {
   }
 
   static illuminate(List<List<int>> octopuses, int x, int y) {
-    if (octopuses[y][x] <= 0) {
+    if (octopuses[y][x] == 0) {
       return 0;
     }
     octopuses[y][x]++;
@@ -71,10 +72,10 @@ class Day11Logic {
           illuminate(octopuses, x - 1, y - 1) +
           illuminate(octopuses, x - 0, y - 1) +
           illuminate(octopuses, x + 1, y - 1) +
-          illuminate(octopuses, x - 1, y) +
-          illuminate(octopuses, x + 1, y) +
+          illuminate(octopuses, x - 1, y - 0) +
+          illuminate(octopuses, x + 1, y + 0) +
           illuminate(octopuses, x - 1, y + 1) +
-          illuminate(octopuses, x - 0, y + 1) +
+          illuminate(octopuses, x + 0, y + 1) +
           illuminate(octopuses, x + 1, y + 1);
     }
     return 0;
@@ -82,35 +83,36 @@ class Day11Logic {
 
   static part2(List<List<int>> octopuses) {
     addOuterLayer(octopuses);
-    for (int i = 0; i < 1000000; i++) {
-      for (int y = 1; y < 11; y++) {
-        for (int x = 1; x < 11; x++) {
+    var maxX = octopuses[0].length - 1;
+    var maxY = octopuses.length - 1;
+    for (int step = 1; step <= 1000; step++) {
+      for (int y = 1; y < maxY; y++) {
+        for (int x = 1; x < maxX; x++) {
           octopuses[y][x]++;
         }
       }
-      for (int y = 1; y < 11; y++) {
-        for (int x = 1; x < 11; x++) {
+      for (int y = 1; y < maxY; y++) {
+        for (int x = 1; x < maxX; x++) {
           if (octopuses[y][x] > 9) {
             illuminate(octopuses, x, y);
           }
         }
       }
       if (octopuses
-              .sublist(1, 11)
-              .map((e) => e.sublist(1, 11).reduce((value, element) => value + element))
+              .sublist(1, maxY)
+              .map((e) => e.sublist(1, maxX).reduce((value, element) => value + element))
               .reduce((value, element) => element + value) ==
           0) {
-        return i + 1;
+        return step;
       }
     }
     return 0;
   }
 
   static addOuterLayer(List<List<int>> octopuses) {
-    int intMin = -pow(2, 63);
-    octopuses.forEach((e) => e.insert(0, intMin));
-    octopuses.forEach((e) => e.add(intMin));
-    octopuses.insert(0, List.generate(octopuses[0].length, (i) => intMin));
-    octopuses.add(List.generate(octopuses[0].length, (i) => intMin));
+    octopuses.forEach((e) => e.insert(0, 0));
+    octopuses.forEach((e) => e.add(0));
+    octopuses.insert(0, List.generate(octopuses[0].length, (i) => 0));
+    octopuses.add(List.generate(octopuses[0].length, (i) => 0));
   }
 }

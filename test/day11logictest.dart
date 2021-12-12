@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 
 import 'package:adventofcode2021/day11.dart';
 import 'package:flutter_test/flutter_test.dart';
