@@ -33,7 +33,7 @@ class _Part2State extends State<_Part2> {
   noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
 
-Future<Map<String, List<Cave>>> _loadDayInput() async => await rootBundle.loadString('assets/day12.txt').then(Day12Logic.parseInput);
+//Future<Map<String, List<Cave>>> _loadDayInput() async => await rootBundle.loadString('assets/day12.txt').then(Day12Logic.parseInput);
 
 class Cave {
   String name;
