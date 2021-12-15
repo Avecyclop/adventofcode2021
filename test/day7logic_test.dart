@@ -29,6 +29,9 @@ void main() {
     print('Day 7');
     print("Part 1: $part1");
     print("Part 2: $part2");
+
+    expect(part1, 335271);
+    expect(part2, 95851339);
   });
 
   test("Crab target", () {

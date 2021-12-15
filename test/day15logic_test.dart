@@ -35,13 +35,13 @@ void main() {
     var part1 = Day15Logic.part1(Day15Logic.parseInput(input));
     var part2 = Day15Logic.part2(Day15Logic.parseInput(input));
 
+    print('Day 15');
+    print("Part 1: $part1");
+    print("Part 2: $part2");
+
     expect(part1, 589);
     expect(part2, isNot(3067));
     expect(part2, isNot(2889));
     expect(part2, 2885);
-
-    print('Day 15');
-    print("Part 1: $part1");
-    print("Part 2: $part2");
   });
 }

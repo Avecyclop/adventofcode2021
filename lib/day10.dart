@@ -1,40 +1,4 @@
-import 'dart:async';
-
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:tuple/tuple.dart';
-
-import 'day.dart';
-
-class Day10 extends Day {
-  @override
-  Widget part1() => _Part1();
-
-  @override
-  Widget part2() => _Part2();
-}
-
-class _Part1 extends StatefulWidget {
-  @override
-  _Part1State createState() => _Part1State();
-}
-
-class _Part1State extends State<_Part1> with TickerProviderStateMixin {
-  @override
-  noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
-}
-
-class _Part2 extends StatefulWidget {
-  @override
-  _Part2State createState() => _Part2State();
-}
-
-class _Part2State extends State<_Part2> with TickerProviderStateMixin {
-  @override
-  noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
-}
-
-Future<List<String>> _loadDayInput() async => await rootBundle.loadString('assets/day10.txt').then(Day10Logic.parseInput);
 
 class Day10Logic {
   static List<String> parseInput(String input) => input.split("\n").map((e) => e.trim()).where((e) => e.isNotEmpty).toList();

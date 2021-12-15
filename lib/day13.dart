@@ -1,39 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
-
-import 'day.dart';
-
-class Day13 extends Day {
-  @override
-  Widget part1() => _Part1();
-
-  @override
-  Widget part2() => _Part2();
-}
-
-class _Part1 extends StatefulWidget {
-  @override
-  _Part1State createState() => _Part1State();
-}
-
-class _Part1State extends State<_Part1> {
-  @override
-  noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
-}
-
-class _Part2 extends StatefulWidget {
-  @override
-  _Part2State createState() => _Part2State();
-}
-
-class _Part2State extends State<_Part2> {
-  @override
-  noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
-}
-
-//Future<Map<String, List<Cave>>> _loadDayInput() async => await rootBundle.loadString('assets/day13.txt').then(Day13Logic.parseInput);
 
 class Day13Logic {
   static Tuple2<Set<Tuple2<int, int>>, List<Tuple2<String, int>>> parseInput(String input) {

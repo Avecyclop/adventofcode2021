@@ -33,5 +33,8 @@ void main() {
     print('Day 9');
     print("Part 1: $part1");
     print("Part 2: $part2");
+
+    expect(part1, 496);
+    expect(part2, 902880);
   });
 }
