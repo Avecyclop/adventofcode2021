@@ -59,8 +59,8 @@ class Day15Logic {
 
     traverseDownRight(newCave, riskLevels, 1, 1, 0);
 
-    var points = 1;
-    while (points != 0) {
+    var points;
+    do {
       points = 0;
       for (int y = 1; y < riskLevels.length - 1; y++) {
         for (int x = 1; x < riskLevels[0].length - 1; x++) {
@@ -104,7 +104,7 @@ class Day15Logic {
           }
         }
       }
-    }
+    } while (points != 0);
 
     var lastRow = riskLevels[riskLevels.length - 2];
     return lastRow[lastRow.length - 2];
