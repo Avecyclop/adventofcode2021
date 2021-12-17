@@ -27,7 +27,6 @@ class Day16Logic {
   }
 
   static parsePacket1(String bits, Counter pos, List<int> versions) {
-    //var start = pos.get();
     var version = getNext(3, bits, pos);
     versions.add(version);
     var typeId = getNext(3, bits, pos);
